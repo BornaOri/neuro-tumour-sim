@@ -1,6 +1,8 @@
 
 from neuron import h, gui
 import matplotlib.pyplot as plt
+import time
+
 h.load_file("stdrun.hoc")
 
 #Defines the Neuron's Morphology
@@ -24,9 +26,9 @@ t_vec = h.Vector().record(h._ref_t) #Rec time
 
 #Simulation Params
 h.tstop = 20 #How long simulation runs (ms)
-h.finitialize(-65) #Initial resting potential & calculate channel states
+h.finitialize(-20) #Initial resting potential & calculate channel states
 h.run()
-
+print("Sigmund Freud")
 #Plotting Results using matplotlib
 plt.figure(figsize=(8,4))
 plt.plot(t_vec, v_vec)
@@ -34,9 +36,14 @@ plt.xlabel("Time (ms)")
 plt.ylabel("Membrane potential (mV)")
 plt.title("Single HH Neuron Sim")
 
-plt.savefig("single_neuron_spike.png") #makes png of plot
+#mod png
+timestamp = time.strftime("%Y%m%d-%H%M%S")
+output_filename = f"spike_plot_{timestamp}.jpeg"
 
-print("Plot saved to singleneuronspike png")
+plt.savefig(output_filename) #makes png of plot
+
+print(f"Plot saved to {output_filename}")
 plt.show()
+
 
 
