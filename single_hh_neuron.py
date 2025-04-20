@@ -23,18 +23,22 @@ iclamp.amp = 0.3 #Amplitude- to be changed for spike
 #Recording Variables
 v_vec = h.Vector().record(soma(0.5)._ref_v) #Rec voltage @ middle of soma
 t_vec = h.Vector().record(h._ref_t) #Rec time
-
+initial_voltage_setter = -80
 #Simulation Params
-h.tstop = 20 #How long simulation runs (ms)
-h.finitialize(-20) #Initial resting potential & calculate channel states
+h.tstop = 40 #How long simulation runs (ms)
+h.v_init = initial_voltage_setter
+#h.finitialize(0) #Initial resting potential & calculate channel states
+h.stdinit()
+print(f"{soma(0.5).v:.4f}")
+
 h.run()
-print("Fr")
+print(f"First 5 voltages from v_vec: {list(v_vec)[:5]}")
 #Plotting Results using matplotlib
 plt.figure(figsize=(8,4))
 plt.plot(t_vec, v_vec)
 plt.xlabel("Time (ms)")
 plt.ylabel("Membrane potential (mV)")
-plt.title("Single HH Neuron Sim")
+plt.title("so not a sigma way to debug rn")
 
 #mod png
 timestamp = time.strftime("%Y%m%d-%H%M%S")
@@ -43,7 +47,7 @@ output_filename = f"spike_plot_{timestamp}.jpeg"
 plt.savefig(output_filename) #makes png of plot
 
 print(f"Plot saved to {output_filename}")
-plt.show()
+
 
 
 
