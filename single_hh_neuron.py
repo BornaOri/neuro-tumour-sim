@@ -28,7 +28,7 @@ t_vec = h.Vector().record(h._ref_t) #Rec time
 h.tstop = 20 #How long simulation runs (ms)
 h.finitialize(-20) #Initial resting potential & calculate channel states
 h.run()
-print("Frederic")
+print("Fr")
 #Plotting Results using matplotlib
 plt.figure(figsize=(8,4))
 plt.plot(t_vec, v_vec)
