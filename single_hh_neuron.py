@@ -18,15 +18,15 @@ iclamp = h.IClamp(soma(0.5)) #Clamp at mid soma (0.5)
 
 iclamp.delay = 5 #Time pulse starts in ms
 iclamp.dur = 1 #Duration of pulse in ms
-iclamp.amp = 0.3 #Amplitude- to be changed for spike
+iclamp.amp = 0.9 #Amplitude- to be changed for spike
 
 #Recording Variables
 v_vec = h.Vector().record(soma(0.5)._ref_v) #Rec voltage @ middle of soma
 t_vec = h.Vector().record(h._ref_t) #Rec time
-initial_voltage_setter = -80
+initial_voltage_setter = -65 #sets initial voltage
 #Simulation Params
 h.tstop = 40 #How long simulation runs (ms)
-h.v_init = initial_voltage_setter
+h.v_init = initial_voltage_setter #initialises initial voltage
 #h.finitialize(0) #Initial resting potential & calculate channel states
 h.stdinit()
 print(f"{soma(0.5).v:.4f}")
@@ -38,7 +38,7 @@ plt.figure(figsize=(8,4))
 plt.plot(t_vec, v_vec)
 plt.xlabel("Time (ms)")
 plt.ylabel("Membrane potential (mV)")
-plt.title("so not a sigma way to debug rn")
+plt.title("HH model depolarisation model")
 
 #mod png
 timestamp = time.strftime("%Y%m%d-%H%M%S")
