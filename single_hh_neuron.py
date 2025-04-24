@@ -1,4 +1,4 @@
-
+"""
 from neuron import h, gui
 import matplotlib.pyplot as plt
 import time
@@ -47,7 +47,7 @@ output_filename = f"spike_plot_{timestamp}.jpeg"
 plt.savefig(output_filename) #makes png of plot
 
 print(f"Plot saved to {output_filename}")
-
+ """
 
 
 
