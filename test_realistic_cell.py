@@ -11,12 +11,12 @@ h.load_file("stdrun.hoc")
 # Parameters
 CELL_TO_TEST = "Pyramidal" # Or "Basket"
 if CELL_TO_TEST == "Pyramidal":
-    swc_file = 'H17.06.006.11.09.04_591274508_m (1).swc' # <<< Ensure this filename is exactly correct
+    swc_file = 'H17.06.006.11.09.04_591274508_m (1).swc' 
     CellClass = L23PyramidalCell
     cell_label = "L2/3 Pyramidal"
     iclamp_amp = 0.5
 else:
-    swc_file = 'Fig2b_cell1_0904091kg.CNG.swc' # <<< Ensure this filename is exactly correct
+    swc_file = 'Fig2b_cell1_0904091kg.CNG.swc' 
     CellClass = L23BasketCell
     cell_label = "L2/3 Basket"
     iclamp_amp = 0.8

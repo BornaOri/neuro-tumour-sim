@@ -5,13 +5,6 @@ import numpy as np
 import random
 import os
 
-# --- REMOVE THIS LINE - Causes Circular Import ---
-# from realistic_neuron_models import L23PyramidalCell, L23BasketCell # <<< DELETE THIS LINE >>>
-# --- END REMOVAL ---
-
-# Optional: Load compiled mechanisms explicitly
-# ... (rest of optional loading code remains the same) ...
-
 #Base class for basic neuron morphology using lfpykit
 class RealisticNeuronTemplate:
     """Base class using LFPy to handle morphology and basic setup.""" # User comment retained
@@ -166,14 +159,14 @@ class L23PyramidalCell(RealisticNeuronTemplate):
                  if not hasattr(sec, 'gbar_Im'):
                      sec.insert(im_mech_name)
 
-                 im_param_name = 'gbar_Im' # Assumed parameter name
+                 im_param_name = 'gbar_Im' 
 
                  try:
                      setattr(sec, im_param_name, gbar_im_initial_guess)
                      count += 1
                  except AttributeError:
                       try:
-                          im_param_name_alt = 'gbar' # Fallback attempt
+                          im_param_name_alt = 'gbar' 
                           setattr(sec, im_param_name_alt, gbar_im_initial_guess)
                           count += 1
                           print(f"    Note: Used '{im_param_name_alt}' instead of '{im_param_name}' for {sec.name()}")
@@ -185,12 +178,12 @@ class L23PyramidalCell(RealisticNeuronTemplate):
             print(f"    WARNING: '{im_mech_name}' mechanism not found/loaded. Cannot insert.")
 
 class L23BasketCell(RealisticNeuronTemplate):
-    """ Inherits from base, adds Basket cell specific channels like Kv3 """ # User comment retained
+    """ Inherits from base, adds Basket cell specific channels like Kv3 """ 
     def __init__(self, cell_id, swc_file, **kwargs):
         super().__init__(cell_id, swc_file, **kwargs)
         print(f"  Applying Basket Cell specifics to Cell {self.cell_id}...")
 
-        kv3_mech_name = 'Kv3_1' # Based on your .mod file
+        kv3_mech_name = 'Kv3_1' 
         gbar_kv3_initial_guess = 0.01
 
         if h.name_declared(kv3_mech_name):
@@ -198,7 +191,7 @@ class L23BasketCell(RealisticNeuronTemplate):
             if not target_sections and self.all_sections: target_sections = self.all_sections
             count = 0
             for sec in target_sections:
-               kv3_param_name = 'gbar_Kv3_1' # Assumed convention gbar_SUFFIX
+               kv3_param_name = 'gbar_Kv3_1' 
 
                if not hasattr(sec, kv3_param_name):
                    sec.insert(kv3_mech_name)
@@ -206,7 +199,7 @@ class L23BasketCell(RealisticNeuronTemplate):
                    setattr(sec, kv3_param_name, gbar_kv3_initial_guess)
                except AttributeError:
                     try:
-                        kv3_param_name_alt = 'gbar' # Fallback based on your .mod PARAMETER block
+                        kv3_param_name_alt = 'gbar' 
                         setattr(sec, kv3_param_name_alt, gbar_kv3_initial_guess)
                         print(f"    Note: Used '{kv3_param_name_alt}' instead of '{kv3_param_name}' for {sec.name()}")
                     except AttributeError:
